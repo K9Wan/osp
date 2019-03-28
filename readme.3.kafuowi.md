@@ -1,2 +1,2 @@
-choi ji hun
+choi jihun
 2018114870
