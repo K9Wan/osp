@@ -1,2 +1,1 @@
-Jeong, Jae Jin
-2018113932
+2018113932 Jeong,JaeJin
