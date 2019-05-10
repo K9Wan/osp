@@ -244,6 +244,32 @@ def logout():
     return redirect(url_for('public_timeline'))
 
 
+
+@app.route('/admin')
+def admin():
+    #a=query_db('SELECT user_id, username, email from user')
+    #cur = g.db.execute('SELECT user_id, username, email from user')
+    #a=cur.fetchall(),cur.description
+    return render_template('admin.html', users=query_db('''
+        select user_id,username,email from user
+        order by username limit?''', [PER_PAGE]))
+
+@app.route('/<username>/remove')
+def remove_user(username):
+    """Removes user from user list."""
+    if not g.user:
+        abort(401)
+    whom_id = get_user_id(username)
+    if whom_id is None:
+        abort(404)
+    g.db.execute('delete from user where username = ?',
+                (username,))
+    g.db.commit()
+    flash(f'"{username}" 님을 지웠습니다')
+    return redirect(url_for('admin'))
+
+
+
 # add some filters to jinja
 app.jinja_env.filters['datetimeformat'] = format_datetime
 app.jinja_env.filters['gravatar'] = gravatar_url
