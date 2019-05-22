@@ -1,0 +1,23 @@
+<p><h3>comparing text of webpages.</h3></p>
+
+<ul>
+{% for (id,url),vector in vectors %}
+<li><h4>id: {{id}}, url: <a href="{{url}}" target="_blank">{{url}}</a></h4>
+    <ul>
+    {% for x in range(id+1,4) %}
+        <li><h5>compare with page of id {{x}}</h5></li>
+        <ul>
+            <li>similarity by standard1: {{st1(vector, vectors[x][1])}}</li>
+            <li>similarity by standard2: {{st2(vector, vectors[x][1])}}</li>
+        </ul>
+    {% endfor %}
+    </ul>
+</li>
+{% endfor %}
+</ul>
+<p>
+    compared texts from 4 esolang introducing page.
+    standard1 will compare only proportion of noun, adj, etc.
+    standard2 will also consider amount of text.
+    maximum similarity is 1.
+</p>
